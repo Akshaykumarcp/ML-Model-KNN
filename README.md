@@ -118,7 +118,15 @@ Cross validation
 
 - as k increases, training error increases
 
-## What happens to KNN when dataset is imbalanced
+## Can KNN do Multiclass classification ?
+
+- Yup
+
+## Can KNN predict in probabilistic prediction ?
+
+- Whoa! Yeah
+
+## KNN when dataset is imbalanced
 
 - The prediction is biased by the majority classes.
 
@@ -131,7 +139,23 @@ Cross validation
 #### Problem with imbalanced dataset even after handling !!
 
 - Possibility of getting high accuracy in imbalanced dataset with dumb model in place because in test dataset (after splitting) majority classes shall be present
-  
+
+## KNN when dataset has outliers
+
+- when k is small (ex: k=1), KNN is prone to outlier
+- perform k-fold cross validation and choose the best accuracy for the right k
+
+## KNN affected by scale of the features ?
+
+- Yes, since KNN is distance based model.
+- Hence, perform column standardization before model training
+
+## Are KNN interpretable ?
+
+- Depends on domain
+- When k is small (ex: 1), model is interpretable.
+- As dimensionality increases in the dataset, interpretability becomes harder
+
 ## Acknowledgements
 
  - [Google Images](https://www.google.co.in/imghp?hl=en-GB&tab=ri&authuser=0&ogbl)
