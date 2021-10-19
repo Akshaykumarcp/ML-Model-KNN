@@ -3,6 +3,27 @@
 
 K Nearest Neighbour Machine Learning Model
 
+## Content
+
+1. About KNN Model
+2. KNN Mind Map image
+3. KNN working
+4. Distance measures
+5. Limitations of kNN
+6. Failure of KNN
+7. KNN techniques to reduce space & time complexity
+8. Decision surface for KNN
+9. KNN when Overfit & underfit
+10. Determine right K value in KNN...
+11. Can KNN do Multiclass classification ?
+12. Can KNN do Probabilitics predictions ?
+13. KNN when dataset is imbalanced
+14. KNN when dataset has outliers                /
+16. Is KNN affected by scale of the features ?
+17. Are kNN interpetable ?
+18. Acknowledgements
+19. License
+
 ## About KNN Model
 - Simple & powerfull
 - For classification & regression
