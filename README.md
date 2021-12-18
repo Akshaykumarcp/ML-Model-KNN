@@ -11,28 +11,28 @@ K Nearest Neighbour Machine Learning Model
 4. Distance measures
 5. Limitations of kNN
 6. Failure of KNN
-7. KNN techniques to reduce space & time complexity
-8. Decision surface for KNN
-9. KNN when Overfit & underfit
-10. Determine right K value in KNN...
-11. Can KNN do Multiclass classification ?
-12. Can KNN do Probabilitics predictions ?
-13. KNN when dataset is imbalanced
-14. KNN when dataset has outliers                /
-16. Is KNN affected by scale of the features ?
-17. Are kNN interpetable ?
-18. Acknowledgements
-19. License
+7. Decision surface for KNN
+8. KNN when Overfit & underfit
+9. Determine right K value in KNN
+10. Can KNN do Multiclass classification ?
+11. Can KNN do Probabilitics predictions ?
+12. KNN when dataset is imbalanced
+13. KNN when dataset has outliers 
+14. Is KNN affected by scale of the features ?
+15. Are kNN interpetable ?
+16. KNN techniques to reduce space & time complexity
+17. Acknowledgements
+18. License
 
-## About KNN Model
+# 1. About KNN Model
 - Simple & powerfull
 - For classification & regression
 - Distance based machine learning algorithm
 
-## KNN Mind Mapping
+# 2. KNN Mind Mapping
 ![KNN mind mapping](https://github.com/Akshaykumarcp/ML-Model-KNN/blob/main/KNN.jpg)
 
-## KNN Working
+# 3. KNN Working
 
 ![KNN Working](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final1_ibdm8a.png)
 
@@ -42,65 +42,143 @@ K Nearest Neighbour Machine Learning Model
 - Run majority vote among selected data points, dominating classification is the winner and winner is the classified point
 - Repeat...
 
-# Distance Measures:
+# 4. Distance Measures:
     
-## 1. Euclidean Distance
+## 4.1. Euclidean Distance
     - is the shortest length between two points
     - often written as || x1 - x2 || --> length of x1 - x2
     - is the L2 norm
 
 ![Euclidean distance](https://cdn-images-1.medium.com/max/800/1*ZrwEraj9S-u_KOWdKWc8sQ.png)
 
-## 2. Manhattan Distance
+## 4.2. Manhattan Distance
     - is the absolute value of length
-    - often writte
+    - Often written as | x1 - x2 | - absolute value of x1 - x2
     - is the L1 norm
 
 ![Manhattan distance](https://d1m75rqqgidzqn.cloudfront.net/wp-data/2020/07/01130416/june-30-hierarchical-clustering-infograph-for-blog-4.png)
 
 In summary:
 
-L1 norm is absolute value
-L2 norm is subtracting and squaring
+- L1 norm is absolute value
+- L2 norm is subtracting and squaring
 
 L1 & L2 norm are computed for vectors.
 
-## 3. Minkowski Distance
+## 4.3. Minkowski Distance
     - is the generalization of L1 & L2 norm
     - Depending on p value, distance is categorized
 
 Formula:
-![Minkowski Distance](data:image/png;base64,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)
+![Minkowski Distance](https://rittikghosh.com/images/min.png)
+
+[Source](https://rittikghosh.com/images/min.png)
 
 When p = 1, known as Manhattan Distance
 
 When p = 2, known as Euclidean Distance
 
 
-![Minkowski Distance](data:image/png;base64,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)
-  
+![Minkowski Distance](https://miro.medium.com/max/1400/1*zJ8PPj8mO4gO2U9-MlwfrA.jpeg)
+[Source](https://miro.medium.com/max/1400/1*zJ8PPj8mO4gO2U9-MlwfrA.jpeg)
 
 Note: Distances are always for 2 points & norms are always for  vectors
 
-## 4. Hamming Distance
+## 4.4. Hamming Distance
     - is the distance between boolean/binary vector
     - used in text processing (binary BOW) and having boolean vectors
 
 Example:
 ![Hamming Distance](https://www.researchgate.net/profile/Fredrick-Ishengoma/publication/264978395/figure/fig1/AS:295895569584128@1447558409105/Example-of-Hamming-Distance.png)
 
-## Limitations of KNN
+# 5. Limitations of KNN
 
 - Time & space complexity is high
 - Hence not widely used
 
-## Failure of KNN
+# 6. Failure of KNN
 - When query point is far away from the k nearest neighbours at the time of training and prediction, target feature (yi) is not sure of training/prediction.
 - Data points based on target features are randomly spread i,e in binary classification posivte and negative data points are jumbled hence no usefull information is found.
 
-## KNN Techniques to reduce Space & Time complexity
+# 7. Decision Surface
+![Decision Surface](https://elvinouyang.github.io/assets/images/Introduction%20to%20Machine%20Learning%20with%20Python%20-%20Chapter%202%20-%20Datasets%20and%20kNN_files/Introduction%20to%20Machine%20Learning%20with%20Python%20-%20Chapter%202%20-%20Datasets%20and%20kNN_31_1.png)
+    
+    - Curve that seperates positive & negaive points are the decision surfaces
+    - when k=1, non smooth curve, no errors & over fit
+    - when k=9, smooth curve, minimal errors & well fit
+    - when k = 100, smooth curve, more error & under fit
+    - The smoothness of the decision surfaces increases as k increases
 
-## kd-tree
+# 8. Overfit & underfit
+
+![Overfit & underfit](https://upload.wikimedia.org/wikipedia/commons/1/19/Overfitting.svg)
+
+[Source](https://upload.wikimedia.org/wikipedia/commons/1/19/Overfitting.svg)
+
+Overfit: Extrem non-smooth decision surface so that no mistake happen in training data atleast
+
+Underfit: Doesn't care about decision surface
+
+Well fit: Balance overfit and underfit, less prone to noise and is robost
+
+## How to make sure we are not overfitting and underfitting ?
+
+![right "K"](https://datacadamia.com/_media/data_mining/knn_error_rate_best_k.jpg?w=400&h=310&buster=1391632980&tok=e10a1f)
+As k increases, training error increases
+
+- Compute train & test error and plot the error as above image. Pick the right k where train & test error converge.
+
+    ```
+    - When train & test error are high --> Underfit
+    - When train error is small and test error is large --> Overfit
+    ```
+
+# 9. How to determine right "K" value in K-NN ?
+
+- Train KNN model with multiple k value, choose the k value that produces best accuracy. (time consuming)
+- Cross validation 
+
+# 10. Can KNN do Multiclass classification ?
+
+- Yup
+
+# 11. Can KNN predict in probabilistic prediction ?
+
+- Whoa! Yeah
+
+# 12. KNN when dataset is imbalanced
+
+- The prediction is biased by the majority classes.
+
+## How to handle imbalanced dataset ?
+
+- Under sampling
+- Over sampling
+- Provide more wieghtage to minority classes.
+
+## Problem with imbalanced dataset even after handling !!
+
+- Possibility of getting high accuracy in imbalanced dataset with dumb model in place because in test dataset (after splitting) majority classes shall be present
+
+# 13. KNN when dataset has outliers
+
+- when k is small (ex: k=1), KNN is prone to outlier
+- perform k-fold cross validation and choose the best accuracy for the right k
+
+# 14. KNN affected by scale of the features ?
+
+- Yes, since KNN is distance based model.
+- Hence, perform column standardization before model training
+
+# 15. Are KNN interpretable ?
+
+- Depends on domain
+- When k is small (ex: 1), model is interpretable.
+- As dimensionality increases in the dataset, interpretability becomes harder
+
+# 16. KNN Techniques to reduce Space & Time complexity
+
+## 16.1. kd-tree
 
 ![App Screenshot](https://www.researchgate.net/profile/Ruben-Gonzalez-Crespo/publication/327289160/figure/fig4/AS:666062085435401@1535812984438/Visualization-of-the-k-d-tree-algorithm.png)
 - Break the 2D space using axis-parallel lines/planes into cuboid/rectangle/huper-cuboid
@@ -110,79 +188,12 @@ Example:
 - Works fine for smaller dimensionality of Datasets
 - As dimensionality increases regions in kd-tree increases due to which time complexity increases
 
-## Locality sensitive hashing
+## 16.2. Locality sensitive hashing
 
-## Decision Surface
-![Decision Surface](https://elvinouyang.github.io/assets/images/Introduction%20to%20Machine%20Learning%20with%20Python%20-%20Chapter%202%20-%20Datasets%20and%20kNN_files/Introduction%20to%20Machine%20Learning%20with%20Python%20-%20Chapter%202%20-%20Datasets%20and%20kNN_31_1.png)
-    
-    - Curve that seperates positive & negaive points are the decision surfaces
-    - when k=1, non smooth curve, no errors & over fit
-    - when k=9, smooth curve, minimal errors & well fit
-    - when k = 100, smooth curve, more error & under fit
-    - The smoothness of the decision surfaces increases as k increases
-
-## Overfit & underfit
-
-![Overfit & underfit](data:image/png;base64,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)
-
-Overfit: Extrem non-smooth decision surface so that no mistake happen in training data atleast
-
-Underfit: Doesn't care about decision surface
-
-Well fit: Balance overfit and underfit, less prone to noise and is robost
-
-## How to determine right "K" value in K-NN ?
-
-Cross validation 
-
-![right "K"](https://datacadamia.com/_media/data_mining/knn_error_rate_best_k.jpg?w=400&h=310&buster=1391632980&tok=e10a1f)
-
-- as k increases, training error increases
-
-## Can KNN do Multiclass classification ?
-
-- Yup
-
-## Can KNN predict in probabilistic prediction ?
-
-- Whoa! Yeah
-
-## KNN when dataset is imbalanced
-
-- The prediction is biased by the majority classes.
-
-### How to handle imbalanced dataset ?
-
-- Under sampling
-- Over sampling
-- Provide more wieghtage to minority classes.
-
-#### Problem with imbalanced dataset even after handling !!
-
-- Possibility of getting high accuracy in imbalanced dataset with dumb model in place because in test dataset (after splitting) majority classes shall be present
-
-## KNN when dataset has outliers
-
-- when k is small (ex: k=1), KNN is prone to outlier
-- perform k-fold cross validation and choose the best accuracy for the right k
-
-## KNN affected by scale of the features ?
-
-- Yes, since KNN is distance based model.
-- Hence, perform column standardization before model training
-
-## Are KNN interpretable ?
-
-- Depends on domain
-- When k is small (ex: 1), model is interpretable.
-- As dimensionality increases in the dataset, interpretability becomes harder
-
-## Acknowledgements
+# 17. Acknowledgements
 
  - [Google Images](https://www.google.co.in/imghp?hl=en-GB&tab=ri&authuser=0&ogbl)
   
-## License
+# 18. License
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
-
-  
