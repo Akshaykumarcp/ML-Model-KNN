@@ -1,8 +1,3 @@
-
-# ML-Model-KNN
-
-K Nearest Neighbour Machine Learning Model
-
 ## Content
 
 1. About KNN Model
@@ -21,8 +16,11 @@ K Nearest Neighbour Machine Learning Model
 14. Is KNN affected by scale of the features ?
 15. Are kNN interpetable ?
 16. KNN techniques to reduce space & time complexity
-17. Acknowledgements
-18. License
+17. Lazy Learner
+18. Weighted Nearest Neighbor
+19. Pros of KNN
+20. Acknowledgements
+21. License
 
 # 1. About KNN Model
 - Simple & powerfull
@@ -93,8 +91,10 @@ Example:
 
 # 5. Limitations of KNN
 
-- Time & space complexity is high
+- Time (since the model is not saved beforehand in this algorithm (lazy learner), so every time one predicts a test value, it follows the same steps again and again) & space (store the whole training set for every test set) complexity is high
 - Hence not widely used
+- Not suitable for high dimensional data.
+- Expensive in testing phase
 
 # 6. Failure of KNN
 - When query point is far away from the k nearest neighbours at the time of training and prediction, target feature (yi) is not sure of training/prediction.
@@ -135,8 +135,14 @@ As k increases, training error increases
 
 # 9. How to determine right "K" value in K-NN ?
 
+- The value of k affects the k-NN classifier drastically. 
+- The flexibility of the model decreases with the increase of ‘k’. With lower value of ‘k’ variance is high and bias is low but as we increase the value of ‘k’ variance starts decreasing and bias starts increasing. 
+- With very low values of ‘k’ there is a chance of algorithm overfitting the data whereas with very high value of ‘k’ there is a chance of underfitting.
+
+## K value can be determined by:
 - Train KNN model with multiple k value, choose the k value that produces best accuracy. (time consuming)
 - Cross validation 
+- Error versus K curve
 
 # 10. Can KNN do Multiclass classification ?
 
@@ -182,18 +188,59 @@ As k increases, training error increases
 
 ![App Screenshot](https://www.researchgate.net/profile/Ruben-Gonzalez-Crespo/publication/327289160/figure/fig4/AS:666062085435401@1535812984438/Visualization-of-the-k-d-tree-algorithm.png)
 - Break the 2D space using axis-parallel lines/planes into cuboid/rectangle/huper-cuboid
+- Once the tree is formed , it is easy for algorithm to search for the probable nearest neighbor just by traversing the tree. 
 
 ### Limitations of kd-tree
 
 - Works fine for smaller dimensionality of Datasets
 - As dimensionality increases regions in kd-tree increases due to which time complexity increases
+- Gives probable nearest neighbors but can miss out actual nearest neighbors
 
 ## 16.2. Locality sensitive hashing
 
-# 17. Acknowledgements
+## 16.3. Ball Tree
+
+These are very efficient specially in case of higher dimensions.
+
+Ball Tree are formed by following steps:
+
+- Two clusters are created initially
+- All the data points must belong to atleast one of the clusters.
+- One point cannot be in both clusters.
+- Distance of the point is calculated from the centroid of the each cluster. The point closer to the centroid goes into that particular cluster.
+- Each cluster is then divided into sub clusters again, and then the points are classified into each cluster on the basis of distance from centroid.
+- This is how the clusters are kept to be divided till a certain depth.
+- Ball tree formation initially takes a lot of time but once the nested clusters are created, finding nearest neighbors is easier.
+
+# 17. Lazy Learner
+
+- k-NN algorithms are often termed as Lazy learners. Let’s understand why is that. 
+- Most of the algorithms like Bayesian classification, logistic regression, SVM etc., are called Eager learners. 
+- These algorithms generalize over the training set before receiving the test data i.e. they create a model based on the training data before receiving the test data and then do the prediction/classification on the test data. 
+- But this is not the case with the k-NN algorithm. 
+- It doesn’t create a generalized model for the training set but waits for the test data. 
+- Once test data is provided then only it starts generalizing the training data to classify the test data. 
+- So, a lazy learner just stores the training data and waits for the test set. 
+- Such algorithms work less while training and more while classifying a given test dataset.
+
+# 18. Weighted Nearest Neighbor
+- In weighted k-NN, we assign weights to the k nearest neighbors.
+- The weights are typically assigned on the basis of distance. 
+- Sometimes rest of data points are assigned a weight of 0. 
+- The main intuition is that the points in neighbor should have more weights than father points.
+
+# 19. Pros of KNN
+- It can be used for both regression and classification problems.
+- It is very simple and easy to implement.
+- Mathematics behind the algorithm is easy to understand.
+- There is no need to create model or do hyperparameter tuning.
+- KNN doesn't make any assumption for the distribution of the given data.
+- There is not much time cost in training phase.
+
+# 20. Acknowledgements
 
  - [Google Images](https://www.google.co.in/imghp?hl=en-GB&tab=ri&authuser=0&ogbl)
   
-# 18. License
+# 21. License
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
